@@ -17,7 +17,6 @@ class Avis:
         self.content_encoded = embedding
 
 
-# avis_data: list[Avis] = []
 text_encoder = TextEncoder()
 
 
@@ -28,8 +27,18 @@ def construct_avis(avis: Avis) -> Avis:
     return n_avis
 
 
+# test queries
+"""
+    Le prof etait pas clair dans ses explications
+    Le cours est trop théorique
+    Le professeur est très pédagogue
+    Manque de pratique
+    Contenu clair et bien structuré
+    Explications trop rapides
+"""
+
 avis_data = [
-    construct_avis(Avis(user_name="fatou", module="Java avancé",
+    construct_avis(Avis(user_name="moussa", module="Java avancé",
                         content="Le cours est trop théorique, on manque de pratique.")),
 
     construct_avis(Avis(user_name="ibrahima", module="Java avancé",
@@ -48,6 +57,6 @@ avis_data = [
                         content="Le contenu est clair et bien structuré.")),
     construct_avis(Avis(user_name="youssouf", module="Mathématiques",
                         content="Le prof est très pédagogue, j’ai aimé.")),
-    construct_avis(Avis(user_name="mame", module="Cloud",
+    construct_avis(Avis(user_name="fatou", module="Cloud",
                         content="Pas assez de cas pratiques sur AWS.")),
 ]
