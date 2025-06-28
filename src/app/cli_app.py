@@ -13,7 +13,7 @@ menu: dict[MenuKey, str] = {
 }
 
 
-def demander_quelque_chose() -> None:
+def rechercher() -> None:
     query = input("Recherche : ")
     text_encoder = TextEncoder()
     query_vector = text_encoder.encode(query)
@@ -30,11 +30,11 @@ def ajouter_avis() -> None:
     text_encoded = text_encoder.encode(avis_obj.content)
     avis_obj.encode_avis(text_encoded)
     avis_repo = AvisRepository()
-    avis_repo.save_inmemory(avis_obj)
+    avis_repo.save(avis_obj)
 
 
 menu_actions: dict[MenuKey, Callable[[], None]] = {
-    "1": demander_quelque_chose,
+    "1": rechercher,
     "2": ajouter_avis,
 }
 

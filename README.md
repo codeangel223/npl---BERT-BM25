@@ -38,3 +38,16 @@ Les résultats afficheront maintenant :
 - Le nom de l'utilisateur
 - Le module concerné
 - Le score de similarité
+
+# test queries
+
+"""
+Le prof etait pas clair dans ses explications
+Le cours est trop théorique
+Le professeur est très pédagogue
+Manque de pratique
+Contenu clair et bien structuré
+Explications trop rapides
+"""
+
+## Lancer le sc
