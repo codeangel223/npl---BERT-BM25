@@ -1,6 +1,6 @@
 from elasticsearch import Elasticsearch
 import os
-ES_HOST = os.getenv("ES_HOST")
+ES_HOST: str = os.getenv("ES_HOST", "")
 
 headers = {
     "Accept": "application/vnd.elasticsearch+json; compatible-with=9",
