@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Any
 from src.core.config.elastic import elastic_client
 
 
@@ -19,7 +20,9 @@ class QueryAvisInMemory:
             }
         )
         hits = response["hits"]["hits"]
+        self.afficher_resultats(response, hits)
 
+    def afficher_resultats(self, response: Any, hits: Any):
         print(
             f"\n📊 Résultats de recherche ({response["hits"]["total"]["value"]} résultats) :")
         print("=" * 60)
