@@ -29,6 +29,7 @@ pip install -r requirements.txt
 ```bash
 ./setup.sh
 ```
+NB : la commande ./setup.sh est nécessaire pour lancer le serveur elasticsearch et ainsi que nos conteneur Docker. Elle initialise la base  de données avec quelques données d'exemples d'avis.
 
 2. **Lancer l’application en console** :
 
@@ -84,9 +85,6 @@ Contenu clair et bien structuré
 Explications trop rapides
 ```
 
----
-
-NB : la commande ./setup.sh est nécessaire pour lancer le serveur elasticsearch et ainsi que nos conteneur Docker. Elle initialise la base  de données avec quelques données d'exemples d'avis.
 ```bash
 docker-compose down -v #: supprime les conteneurs et les volumes
 docker-compose down #: Arrete les conteneurs mais ne supprime pas les volumes
