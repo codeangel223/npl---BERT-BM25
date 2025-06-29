@@ -1,10 +1,13 @@
 #!/bin/bash
 
-# Adresse de ton instance Elasticsearch
+docker compose up -d
+
 ES_HOST="http://localhost:9201"
 
 # Nom de l'index
 INDEX_NAME="avis_etudiant"
+
+sleep 5
 
 # Création de l'index avec mapping
 curl -X PUT "${ES_HOST}/${INDEX_NAME}" -H 'Content-Type: application/json; charset=UTF-8' -d $'
@@ -27,8 +30,14 @@ curl -X PUT "${ES_HOST}/${INDEX_NAME}" -H 'Content-Type: application/json; chars
         "analyzer": "standard"
       },
       "content_encoded": {
-        "type": "dense_vector"
+        "type": "dense_vector",
+        "index": true,
+        "similarity": "cosine"
       }
     }
   }
 }'
+
+
+# inserer quelques avis pour commencer
+python -m run.insert_avis

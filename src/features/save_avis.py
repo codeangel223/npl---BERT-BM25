@@ -2,9 +2,8 @@ from dataclasses import dataclass
 from src.shared.entities.avis import Avis
 import logging as log
 from typing import Any
+from src.core.config.elastic import elastic_client,  INDEX_NAME
 import uuid
-from src.core.config.elastic import INDEX_NAME, ES_HOST
-import requests
 
 
 @dataclass
@@ -14,19 +13,19 @@ class AvisRepository:
         if not avis.is_encoded():
             log.warning("Avis non encodé !")
 
-        payload: dict[str, Any] = {
+        avis_id = avis.id if avis.id else str(uuid.uuid4())
+
+        doc: dict[str, Any] = {
             "user_name": avis.user_name,
             "module": avis.module,
             "content": avis.content,
             "content_encoded": avis.content_encoded,
         }
+        elastic_client.update(
+            index=INDEX_NAME,
+            id=avis_id,
+            doc=doc,
+            doc_as_upsert=True
+        )
 
-        response = requests.put(url=ES_HOST+f"/{INDEX_NAME}/_doc/{str(uuid.uuid4())}", json=payload, headers={
-            "Content-Type": "application/json",
-            "Accept": "application/vnd.elasticsearch+json"
-        })
-
-        if response.status_code == 201:
-            print("Avis saved successful !")
-        else:
-            print("Avis save failed !")
+        print("Avis saved successful !")

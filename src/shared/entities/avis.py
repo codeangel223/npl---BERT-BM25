@@ -7,6 +7,7 @@ class Avis:
     user_name: str  # Nom etudiant
     module: str
     content: str
+    id: str | None = None
     content_encoded: List[Any] | None = None
 
     def is_encoded(self) -> bool:

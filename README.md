@@ -1,34 +1,61 @@
-# Projet BM25 + BERT pour la recherche d'avis des étudiants sur les Cours
+# 🔍 Projet de Recherche Sémantique d’Avis Étudiants (BM25 + BERT)
 
-## 🛠️ Installation
+Ce projet combine la recherche traditionnelle (BM25) avec un **modèle de similarité sémantique multilingue** pour améliorer la recherche d’avis d’étudiants sur les cours, en français.
+
+---
+
+## ⚙️ Installation
+
+1. **Créer un environnement virtuel** (recommandé) :
+
+```bash
+python -m venv venv
+source venv/bin/activate     # Linux / macOS
+venv\Scripts\activate        # Windows
+```
+
+2. **Installer les dépendances** :
 
 ```bash
 pip install -r requirements.txt
 ```
-## Lancement du serveur elasticsearch
+
+---
+
+## 🚀 Lancer l’application
+
+1. **Initialiser les données / l’environnement** :
 
 ```bash
-docker compose up elasticsearch -d
+./setup.sh
 ```
 
-## 🚀 Lancement de l'application console 
+2. **Lancer l’application en console** :
 
 ```bash
 python -m run
 ```
 
-## 📊 Fonctionnalités
+---
 
-1. **Recherche d'avis** : Recherche sémantique en français
-2. **Ajout d'avis** : Ajout de nouveaux avis avec encodage automatique
+## 📌 Fonctionnalités
 
-## 🔧 Modèles utilisés
+- 🔍 **Recherche d’avis** : recherche sémantique en français
+- ➕ **Ajout d’avis** : enregistrement de nouveaux avis, encodés automatiquement
 
-- **CamemBERT** : Modèle BERT spécialisé pour le français
-- **Sentence-CamemBERT** : Modèle d'encodage de phrases françaises
-- **Similarité cosinus** : Calcul de similarité entre vecteurs
+---
 
-## 📝 Exemple d'utilisation
+## 🧠 Modèle utilisé
+
+- **Distiluse-base-multilingual-cased** :
+  Un modèle léger et multilingue (dont le français) basé sur `distilBERT`, proposé par [Sentence-Transformers](https://www.sbert.net).
+
+- **Similarité cosinus** :
+  Mesure de la proximité entre les vecteurs d’avis.
+
+---
+
+## 💬 Exemple d’utilisation (Console)
 
 ```
 1 -> Demander quelque chose
@@ -37,22 +64,24 @@ python -m run
 Recherche : Le cours est trop théorique
 ```
 
-Les résultats afficheront maintenant :
+Les résultats afficheront :
 
-- Le contenu de l'avis
-- Le nom de l'utilisateur
-- Le module concerné
-- Le score de similarité
+- 📄 Contenu de l’avis
+- 👤 Nom de l'étudiant
+- 📘 Module concerné
+- 📈 Score de similarité (entre 0 et 1)
 
-# test queries
+---
 
-"""
-Le prof etait pas clair dans ses explications
+## 🧪 Exemples de requêtes à tester
+
+```
+Le prof était pas clair dans ses explications
 Le cours est trop théorique
 Le professeur est très pédagogue
 Manque de pratique
 Contenu clair et bien structuré
 Explications trop rapides
-"""
+```
 
-## Lancer le sc
+---
