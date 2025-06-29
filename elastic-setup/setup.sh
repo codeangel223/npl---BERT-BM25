@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Adresse de ton instance Elasticsearch
-ES_HOST="http://localhost:9200"
+ES_HOST="http://localhost:9201"
 
 # Nom de l'index
 INDEX_NAME="avis_etudiant"

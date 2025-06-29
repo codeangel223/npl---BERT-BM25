@@ -5,8 +5,13 @@
 ```bash
 pip install -r requirements.txt
 ```
+## Lancement du serveur elasticsearch
 
-## 🚀 Lancement
+```bash
+docker compose up elasticsearch -d
+```
+
+## 🚀 Lancement de l'application console 
 
 ```bash
 python -m run
