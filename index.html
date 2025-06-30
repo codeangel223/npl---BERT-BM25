@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>presentation-bert+bm25</title>
+    <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  </head>
+
+  <body class="stackedit">
+    <div class="stackedit__html">
+      <h1 id="🎓-projet--recherche-sémantique-d’avis-étudiants">
+        🎓 Projet : Recherche Sémantique d’Avis Étudiants
+      </h1>
+      <h3 id="bm25--bert-dans-le-cadre-du-cours-de-nlp">
+        (BM25 + BERT dans le cadre du cours de NLP)
+      </h3>
+      <hr />
+      <h2 id="🧾-contexte-pédagogique">🧾 Contexte pédagogique</h2>
+      <p>
+        Ce projet a été réalisé dans le cadre du
+        <strong>cours de Natural Language Processing (NLP)</strong>.<br />
+        L’objectif pédagogique était de concevoir un système de recherche
+        d’information performant combinant :
+      </p>
+      <ul>
+        <li>
+          🔍 <strong>BM25</strong>, une méthode de recherche lexicale (via
+          Elasticsearch)
+        </li>
+        <li>
+          🧠 <strong>Embeddings contextualisés</strong>, à l’aide d’un modèle de
+          type BERT
+        </li>
+      </ul>
+      <blockquote>
+        <p>
+          👉 Le sujet nous invitait à proposer une
+          <strong>solution hybride</strong> capable de mieux interpréter le sens
+          des phrases, en particulier dans le cadre d’une
+          <strong>application concrète</strong>.
+        </p>
+      </blockquote>
+      <hr />
+      <h2 id="🎯-sujet-du-projet">🎯 Sujet du projet</h2>
+      <p>
+        Nous avons choisi de travailler sur le
+        <strong>traitement des avis d’étudiants sur leurs cours</strong>.<br />
+        Ces avis sont souvent :
+      </p>
+      <ul>
+        <li>Rédigés en langage naturel (et donc subjectifs)</li>
+        <li>Riches en ressentis, mais difficiles à analyser automatiquement</li>
+        <li>Très variés en formulation</li>
+      </ul>
+      <h3 id="notre-mission-">Notre mission :</h3>
+      <blockquote>
+        <p>
+          Concevoir un moteur de recherche capable de
+          <strong
+            >retrouver automatiquement les avis les plus similaires</strong
+          >
+          à une phrase saisie, en <strong>comprenant le sens</strong>, pas
+          uniquement les mots.
+        </p>
+      </blockquote>
+      <hr />
+      <h2 id="🧠-les-outils-que-nous-avons-utilisés">
+        🧠 Les outils que nous avons utilisés
+      </h2>
+      <h3 id="🔤-bert--un-modèle-de-langage-contextuel">
+        🔤 BERT : un modèle de langage contextuel
+      </h3>
+      <p>
+        BERT (Bidirectional Encoder Representations from Transformers) est un
+        modèle de langage développé par Google.<br />
+        Il comprend les phrases en tenant compte du
+        <strong>contexte des mots</strong> (avant et après).
+      </p>
+      <p>🔎 Exemple :</p>
+      <blockquote>
+        <p>“Ce cours manque de pratique” ≠ “C’est un cours très pratique”</p>
+      </blockquote>
+      <hr />
+      <h3 id="🧠-sentence-transformers--l’encodage-de-phrases">
+        🧠 Sentence Transformers : l’encodage de phrases
+      </h3>
+      <p>
+        Nous avons utilisé la librairie <code>sentence-transformers</code> et le
+        modèle :<br />
+        📌 <code>distiluse-base-multilingual-cased</code>
+      </p>
+      <p>
+        Ce modèle transforme une phrase en
+        <strong>vecteur numérique</strong> (embedding), ce qui permet ensuite de
+        :
+      </p>
+      <ul>
+        <li>Comparer des phrases entre elles</li>
+        <li>
+          Mesurer leur <strong>similarité sémantique</strong> via la
+          <strong>cosine similarity</strong>
+        </li>
+      </ul>
+      <hr />
+      <h3 id="🔎-bm25--la-recherche-classique-dans-les-documents">
+        🔎 BM25 : la recherche classique dans les documents
+      </h3>
+      <p>
+        BM25 est un algorithme utilisé par les moteurs de recherche (notamment
+        via <strong>Elasticsearch</strong>).
+      </p>
+      <p>Il fonctionne en :</p>
+      <ul>
+        <li>Comparant les mots de la requête à ceux des documents</li>
+        <li>
+          Calculant une <strong>pertinence lexicale</strong> en fonction de la
+          fréquence des mots
+        </li>
+      </ul>
+      <blockquote>
+        <p>📌 C’est rapide et efficace… mais ça ne comprend pas le sens !</p>
+      </blockquote>
+      <hr />
+      <h2 id="🔀-la-solution-hybride-que-nous-avons-construite">
+        🔀 La solution hybride que nous avons construite
+      </h2>
+      <p>Notre système combine :</p>
+      <ol>
+        <li>
+          ✅ <strong>BM25</strong>, pour une première sélection rapide d’avis
+          pertinents
+        </li>
+        <li>
+          ✅ <strong>Embeddings BERT</strong>, pour reclasser les résultats
+          selon leur <strong>proximité sémantique réelle</strong>
+        </li>
+      </ol>
+      <h3 id="étapes-">Étapes :</h3>
+      <ul>
+        <li>
+          Encodage de tous les avis existants avec le modèle
+          <code>distiluse-base-multilingual-cased</code>
+        </li>
+        <li>
+          Lors d’une recherche :
+          <ul>
+            <li>La requête est encodée</li>
+            <li>On compare son embedding à ceux des avis existants</li>
+            <li>
+              On classe les résultats selon leur
+              <strong>score de similarité cosinus</strong>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <hr />
+      <h2 id="💬-cas-d’usage">💬 Cas d’usage</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Requête étudiante</th>
+            <th>Résultats retournés</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>“Le cours était trop théorique”</td>
+            <td>“Il manque de pratique”</td>
+          </tr>
+          <tr>
+            <td>“Je n’ai rien compris aux explications”</td>
+            <td>“Les explications étaient trop rapides”</td>
+          </tr>
+          <tr>
+            <td>“Bon professeur”</td>
+            <td>“Très pédagogue et clair”</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        ✅ Les résultats sont pertinents
+        <strong>même quand les mots sont différents</strong>, car le sens est
+        compris.
+      </p>
+      <hr />
+      <h2 id="📊-résultats-obtenus">📊 Résultats obtenus</h2>
+      <p>Pour chaque requête, le système affiche :</p>
+      <ul>
+        <li>📄 Le texte de l’avis retrouvé</li>
+        <li>📘 Le module concerné</li>
+        <li>👤 Le nom de l’étudiant</li>
+        <li>📈 Un score de similarité (entre 0 et 1)</li>
+      </ul>
+      <blockquote>
+        <p>
+          Plus le score est proche de 1, plus l’avis est pertinent par rapport à
+          la requête.
+        </p>
+      </blockquote>
+      <hr />
+      <h2 id="🧪-exemple-de-requêtes-testées">
+        🧪 Exemple de requêtes testées
+      </h2>
+      <p>
+        Le prof n’explique pas bien<br />
+        Le cours est trop théorique<br />
+        Pas assez d’exemples<br />
+        Trop de pratique<br />
+        Manque de structure<br />
+        Contenu bien expliqué
+      </p>
+      <hr />
+      <h2 id="🔮-perspectives-d’évolution">🔮 Perspectives d’évolution</h2>
+      <ul>
+        <li>
+          Création d’une <strong>interface Web</strong> pour rendre l’outil
+          accessible à un plus large public
+        </li>
+        <li>
+          Génération automatique de <strong>rapports pédagogiques</strong> à
+          partir des avis
+        </li>
+        <li>
+          Intégration de <strong>l’analyse de sentiment</strong> (positif,
+          négatif, neutre)
+        </li>
+        <li>
+          Extension à d’autres domaines : retour client, feedback produit, etc.
+        </li>
+      </ul>
+      <hr />
+      <h2 id="👥-membres-du-groupe">👥 Membres du groupe</h2>
+      <p>
+        Ce projet a été conçu et réalisé par notre groupe dans le cadre du cours
+        de NLP :
+      </p>
+      <ul>
+        <li>Moussa Mallé</li>
+        <li>Arthur</li>
+        <li>Maxies</li>
+        <li>Adji Fatou</li>
+        <li>Maurice</li>
+      </ul>
+      <hr />
+      <h2 id="🔗-lien-vers-le-dépôt-github">🔗 Lien vers le dépôt GitHub</h2>
+      <p>
+        ➡️
+        <a href="https://github.com/codeangel223/npl---BERT-BM25"
+          >https://github.com/codeangel223/npl---BERT-BM25</a
+        >
+      </p>
+      <hr />
+      <blockquote>
+        <p>
+          Merci pour votre attention 🙏<br />
+          Ce projet illustre l’intérêt des approches hybrides en NLP pour mieux
+          comprendre le <strong>langage humain</strong> dans des contextes
+          réels.
+        </p>
+      </blockquote>
+    </div>
+  </body>
+</html>
