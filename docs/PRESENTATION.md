@@ -4,7 +4,7 @@
 
 ---
 
-## 🧾 Contexte pédagogique
+## 🧾 Contexte pédagogiqu e
 
 Ce projet a été réalisé dans le cadre du **cours de Natural Language Processing (NLP)**.  
 L'objectif pédagogique était de concevoir un système de recherche d'information performant combinant :
